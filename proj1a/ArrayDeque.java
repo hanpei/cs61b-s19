@@ -1,5 +1,3 @@
-import java.util.Deque;
-
 public class ArrayDeque<T> {
     private int capacity = 8;
     private T[] items;
@@ -15,7 +13,7 @@ public class ArrayDeque<T> {
         nextLastIdx = 1;
     }
 
-    public ArrayDeque(int value) {
+    private ArrayDeque(int value) {
         items = (T[]) new Object[value];
         capacity = value;
         size = 0;
@@ -23,11 +21,11 @@ public class ArrayDeque<T> {
         nextLastIdx = 1;
     }
 
-    public ArrayDeque(ArrayDeque<T> other) {
-        capacity = other.getCapacity();
+    public ArrayDeque(ArrayDeque other) {
+        capacity = other.capacity;
         items = (T[]) new Object[capacity];
-        for (int i = 0; i < other.getCapacity(); i++) {
-            items[size] = other.get(i);
+        for (int i = 0; i < capacity; i++) {
+            items[size] = (T) other.get(i);
             size += 1;
         }
         nextFirstIdx = other.nextFirstIdx;
@@ -43,7 +41,7 @@ public class ArrayDeque<T> {
             increaseCapacity();
         }
         items[nextFirstIdx] = item;
-        size ++;
+        size++;
         nextFirstIdx = minusOne(nextFirstIdx);
     }
 
@@ -92,18 +90,16 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        return items[index];
+        int firstIdx = plusOne(nextFirstIdx);
+        int idx = (firstIdx + index) % capacity;
+        return items[idx];
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void increaseCapacity() {
+    private void increaseCapacity() {
         copyDeque(capacity * 2);
     }
 
-    public void decreaseCapacity() {
+    private void decreaseCapacity() {
         copyDeque(capacity / 2);
     }
 
@@ -147,8 +143,7 @@ public class ArrayDeque<T> {
     }
 
     private boolean isSparse() {
-        double LOADING_FACTOR = 0.25;
-        return size <= capacity * LOADING_FACTOR;
+        return size <= capacity * 0.25;
     }
 
     @Override
