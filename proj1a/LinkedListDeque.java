@@ -1,29 +1,29 @@
 public class LinkedListDeque<T> {
 
-    private class Node<T> {
+    public class Node<T> {
         private T value;
         private Node prev;
         private Node next;
 
-        private Node() {
+        public Node() {
             this.value = null;
             this.prev = null;
             this.next = null;
         }
 
-        private Node(T value, Node prev, Node next) {
+        public Node(T value, Node prev, Node next) {
             this.value = value;
             this.prev = prev;
             this.next = next;
         }
-        private Node(T value) {
+        public Node(T value) {
             this.value = value;
             this.prev = null;
             this.next = null;
         }
     }
 
-    private int size = 0;
+    private int size;
     private Node head;
     private Node tail;
 

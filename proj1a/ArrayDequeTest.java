@@ -1,8 +1,5 @@
-import com.sun.corba.se.impl.corba.AsynchInvoke;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Deque;
 
 /**
  * Performs some basic linked list tests.
