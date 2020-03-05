@@ -1,4 +1,8 @@
+import org.junit.Assert;
+import org.junit.Test;
+
 /** Performs some basic linked list tests. */
+
 public class LinkedListDequeTest {
     /* Utility method for printing out empty checks. */
     public static boolean checkEmpty(boolean expected, boolean actual) {
@@ -77,6 +81,21 @@ public class LinkedListDequeTest {
 
         printTestStatus(passed);
 
+    }
+
+    @Test
+    public void getRecursiveTest() {
+        LinkedListDeque<Integer> lld3 = new LinkedListDeque<Integer>();
+        lld3.addLast(1);
+        lld3.addLast(2);
+        lld3.addLast(3);
+        lld3.addFirst(0);
+        lld3.addFirst(-1);
+        Integer actual = lld3.getRecursive(2);
+        System.out.println(actual);
+        Assert.assertNotEquals(java.util.Optional.of(1), actual);
+        Assert.assertNotEquals(java.util.Optional.of(-1), lld3.getRecursive(0));
+        Assert.assertNotEquals(java.util.Optional.of(-1), lld3.get(0));
     }
 
     public static void main(String[] args) {
